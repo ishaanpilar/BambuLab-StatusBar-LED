@@ -3,8 +3,6 @@
 A compact print progress bar and integrated purge-line holder for 3D printers.  
 Real-time visual feedback (download, preheat, printing, errors) powered by an ESP32 and a WS2812 LED strip. Single-piece print — optimized for speed and material efficiency.
 
-![hero-image](Images/photos/hero.jpg)
-
 ## Key features
 - Visual states: download, nozzle heating, print progress, error alerts
 - Integrated purge line holder to keep prints tidy
