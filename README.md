@@ -1,4 +1,4 @@
-# Print Status & Progress Bar  ESP32 + WS2812
+# Print Status & Progress Bar  ESP32 + WS2812 For Bambu Lab Printers
 
 A compact print progress bar and integrated purge-line holder for 3D printers.  
 Real-time visual feedback (download, preheat, printing, errors) powered by an ESP32 and a WS2812 LED strip. Single-piece print — optimized for speed and material efficiency.
