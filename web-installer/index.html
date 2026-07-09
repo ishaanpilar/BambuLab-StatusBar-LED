@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bambu Status Bar — Web Installer</title>
+  <meta name="description" content="Flash the Bambu Status Bar firmware to an ESP32 directly from your browser." />
+  <script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f7f7f8;
+      --fg: #1a1a1a;
+      --muted: #5b5b5b;
+      --card: #ffffff;
+      --border: #e2e2e2;
+      --accent: #16a34a;
+      --accent-fg: #ffffff;
+      --code-bg: #eef1ee;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111214;
+        --fg: #f2f2f2;
+        --muted: #a3a3a3;
+        --card: #191a1d;
+        --border: #2a2b2f;
+        --accent: #22c55e;
+        --accent-fg: #06170c;
+        --code-bg: #1f2124;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 3rem 1.25rem 5rem;
+    }
+    h1 { font-size: 1.75rem; margin-bottom: 0.25rem; }
+    .subtitle { color: var(--muted); margin-top: 0; margin-bottom: 2rem; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .card h2 { margin-top: 0; font-size: 1.1rem; }
+    ol, ul { padding-left: 1.25rem; }
+    li { margin-bottom: 0.5rem; }
+    code {
+      background: var(--code-bg);
+      padding: 0.15em 0.4em;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+    a { color: var(--accent); }
+    .install-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    esp-web-install-button {
+      --esp-tools-button-color: var(--accent-fg);
+      --esp-tools-button-bg: var(--accent);
+    }
+    .browser-note {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    .unsupported {
+      background: var(--code-bg);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+    }
+    footer {
+      margin-top: 2.5rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    footer a { color: var(--muted); }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Bambu Status Bar</h1>
+    <p class="subtitle">Flash the firmware to your ESP32 straight from this page — no PlatformIO, no Arduino IDE, no config files to edit.</p>
+
+    <div class="card">
+      <h2>1. Connect your ESP32</h2>
+      <p>Plug the ESP32 into this computer with a USB cable (the same one you'll use to power it from the printer works fine).</p>
+    </div>
+
+    <div class="card">
+      <h2>2. Install</h2>
+      <div class="install-row">
+        <esp-web-install-button manifest="firmware/manifest.json">
+          <span slot="unsupported" class="unsupported">
+            Your browser doesn't support Web Serial. Open this page in
+            <strong>Chrome</strong> or <strong>Edge</strong> on a desktop
+            computer instead — Web Serial isn't available in Firefox,
+            Safari, or on mobile.
+          </span>
+          <span slot="not-allowed" class="unsupported">
+            This page needs to be served over HTTPS (or localhost) to
+            access USB devices. If you're seeing this on the published
+            site, please <a href="https://github.com/ishaanpilar/BambuLab-StatusBar-LED/issues">open an issue</a>.
+          </span>
+        </esp-web-install-button>
+        <span class="browser-note">Works in Chrome / Edge on desktop.</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>3. Finish setup over WiFi</h2>
+      <p>Once flashing completes, the ESP32 reboots and opens its own WiFi network to configure itself — no cables needed for this part:</p>
+      <ol>
+        <li>On your phone or laptop, join the WiFi network named <code>BambuStatusBar-Setup</code>.</li>
+        <li>A setup page should open automatically (a "captive portal"). If it doesn't, open a browser and go to <code>192.168.4.1</code>.</li>
+        <li>Enter your home WiFi details, plus your printer's IP address, serial number, and LAN access code, then save.</li>
+      </ol>
+      <p>Not sure where to find your printer's IP/serial/access code, or the setup page isn't showing up? See the
+        <a href="https://github.com/ishaanpilar/BambuLab-StatusBar-LED/blob/main/docs/troubleshooting.md">troubleshooting guide</a>.
+      </p>
+    </div>
+
+    <footer>
+      Want to modify the firmware instead? See the
+      <a href="https://github.com/ishaanpilar/BambuLab-StatusBar-LED/blob/main/firmware/README.md">PlatformIO / Arduino IDE instructions</a>
+      in the repo. &middot;
+      <a href="https://github.com/ishaanpilar/BambuLab-StatusBar-LED">Bambu Status Bar on GitHub</a>
+    </footer>
+  </main>
+</body>
+</html>
